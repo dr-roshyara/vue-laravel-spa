@@ -1,5 +1,7 @@
 ## Laravel Commands and Steps 
-#   #first install laravel 
+
+# Installiation 
+    #first install laravel 
     laravel new laravel/vue-laravel-spa
     #install the laravel ui 
     composer require laravel/ui --save-dev 
@@ -17,7 +19,7 @@
     #make a back up of welcome.blade.php 
      mv resources/views/welcome.blade.php    resources/views/backup_welcome.blade.php
      touch resources/views/welcome.blade.php    
-#   #Create new html page 
+#   #Create a new html page 
     #Add html and add app.js 
     <!DOCTYPE html>
     <html lang="en">
@@ -88,7 +90,7 @@
         */
         //4. Export default  router to app.js 
         export default router; 
-#   #create app.js as follows : 
+#   #Create app.js : 
     require('./bootstrap');
   
     //1. import
