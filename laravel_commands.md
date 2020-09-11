@@ -217,4 +217,91 @@
 
                  </div> 
                  </div></template>
-# #                
+#   #First real Vue component 
+    #After setting up the vue.js and bootstrap css, Now our goal is to create further vue component and apply them one by one. The besic of applying vue components is already mentioned by the example vue components. However we explain it again. A vue component consts of the follwoing parts 
+    1. template 
+    2. Js script 
+    4. css styling 
+    #A Js script further may contain the following parts: 
+         1. props 
+        2. methods 
+        3. compute properties 
+        4. components 
+    #create a folder Bookable in js folder 
+    mkdir js/Bookable 
+    create a file named Bookable 
+    touch js/Bookable/Bookable.vue 
+    create another vue component 
+    touch js/Bookable/BookableListItem.vue
+    #Add the follwoing code in BookableListItem.vue
+            <template>
+            <div class="">
+                <h1>Bookable items  Title</h1>
+                <p>Content bookable list item </p>            
+            </div>
+            </template>  
+     #Add the follwoing code in Bookable.Vue file 
+        <template>
+            <div class="test">
+                <bookable-list-item></bookable-list-item>
+            </div>
+        </template>
+        
+        <script>
+            import BookableListItem from "./BookableListItem";
+            export default {
+                components: { 
+                BookableListItem: BookableListItem,
+            }
+        } 
+        </script>
+        
+        <style scoped>
+        .test{
+            background-color: aqua;
+            font-size: 2rem;
+            margin-left:2rem;
+            padding:2rem;
+            margin-right:2rem;
+            align-items: center;
+            justify-content: center;
+        }
+        </style>       
+         Here BookableListItem.vue is imported in Bookable and rendered as item list . 
+         if you want to add more than one times you can add 
+         <bookable-list-item> </bookabble-list-item>
+         more than one time
+         #Finally remove the ExampleComponentvue from routes.js and add the bookable as following 
+            //1 import part 
+            import VueRouter from "vue-router";
+            import Bookable from "./Bookable/Bookable";
+            import ExampleComponent2 from "./components/ExampleComponent2";
+            //2. Define the routes 
+            const routes = [
+            {
+                path: '/',
+                component: Bookable,
+                name: "home",
+            },
+            {
+                path: '/second',
+                component: ExampleComponent2,
+                name: "home2",
+            }, 
+
+            ];
+            //3. create the istance of vue router . 
+            const router = new VueRouter({
+            routes: routes,
+            mode: 'history',
+            
+            });
+          
+            //4. Export default  router to app.js 
+            export default router; 
+        
+        #Run the follwoing commands to compile and see in browser 
+         npm run watch
+         php artisan serve 
+         and then you see the homepage  
+          

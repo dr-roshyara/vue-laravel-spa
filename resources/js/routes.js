@@ -1,14 +1,14 @@
 //1 import part 
  import VueRouter from "vue-router";
 //example component 
-import ExampleComponent from "./components/ExampleComponent";
+import Bookable from "./Bookable/Bookable";
 import ExampleComponent2 from "./components/ExampleComponent2";
 //  import Index from "./Index";
 //2. Define the routes 
 const routes = [
    {
        path: '/',
-       component: ExampleComponent,
+       component: Bookable,
        name: "home",
    },
   {
