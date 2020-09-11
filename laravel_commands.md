@@ -199,4 +199,22 @@
     #one can also use the vbind property to the  to property of router-link 
     #Look at the following two coes 
           <router-link v-bind:to="{name: 'home'}">Home page  </router-link>    
-           <router-link v-bind:to="{name: 'second'}">Second</router-link>      
+           <router-link v-bind:to="{name: 'second'}">Second</router-link>  
+ #  #Bootrap css setup
+    In order to setup the css file add the follwoing line of code in welcome.blade.php 
+    which is also our start page. 
+    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    #You should understand from different sources that it is compiled version of webpack.mix.js . 
+    #Read about how to get app.css file from compiling bootrap and sass files via laravel webpack.mix.js  
+    #In order to use the Bootstrap now . just use some css classes in index.vue like below . 
+            <template> <div>
+            <nav class="navbar navbar-light border-bottom">
+                   <router-link  class ="navbar-brand mr-auto" v-bind:to="{name: 'home' }">Home  </router-link>    
+                <router-link class="btn nav-btn" v-bind:to="{name: 'home2' }" >Second</router-link>   
+                 </nav> 
+                    <div class="container mt-4 mb-4 pr-4 pl-4">
+                     <router-view ></router-view>
+
+                 </div> 
+                 </div></template>
+# #                
