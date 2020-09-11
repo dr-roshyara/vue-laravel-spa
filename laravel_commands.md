@@ -127,7 +127,8 @@
     })->where('any','^(?!api\/)[\/\w\*-]*');
     //This means all the routes fall back to welcome.blade.php except api 
     Auth::routes();
-#   #If you want to register the second example component then do the following steps: 
+#   #Register the second Component 
+    #If you want to register the second example component then do the following steps: 
     1. Go to routes.js page 
     2. Import the second component like following ways 
     #1 import the component 
@@ -195,4 +196,7 @@
          <router-view ></router-view>
         </div>
     </template>    
-    #end      
+    #one can also use the vbind property to the  to property of router-link 
+    #Look at the following two coes 
+          <router-link v-bind:to="{name: 'home'}">Home page  </router-link>    
+           <router-link v-bind:to="{name: 'second'}">Second</router-link>      
