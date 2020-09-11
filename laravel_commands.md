@@ -121,4 +121,78 @@
         
     </body>
     </html>
-#   #Thats it 
+#   #Define the route 
+    Route::get('/{any?}', function () {
+    return view('welcome');
+    })->where('any','^(?!api\/)[\/\w\*-]*');
+    //This means all the routes fall back to welcome.blade.php except api 
+    Auth::routes();
+#   #If you want to register the second example component then do the following steps: 
+    1. Go to routes.js page 
+    2. Import the second component like following ways 
+    #1 import the component 
+    //1 import part 
+        import VueRouter from "vue-router";
+        //example component 
+        import ExampleComponent from "./components/ExampleComponent";
+        import ExampleComponent2 from "./components/ExampleComponent2";
+        //2. Define the routes 
+        const routes = [
+        {
+            path: "/",
+            component: ExampleComponent,
+            name: "home",
+        },
+        {
+            path: "/second",
+            component: ExampleComponent2,
+            name: "home2",
+        },
+         #Then go to the following url 
+        http://127.0.0.1:8000/second
+        - You can also write the second example component inside the first one by writing 
+            <example-compoment2> </example-component2>
+         Then you don't need the second route :"/second"   
+#    #There are two types of registration of vue components . 
+    1. global registration 
+    2. Local registration 
+    - If you want to register globally , then you should write in the app.js file as following 
+     code : 
+        Vue.component("example-component2", require("./components/ExampleComponent2.vue").default); 
+    -You can also register it locally .To register it locally, you should just write it as 
+     import exampleComponent2 from "./components/Examplecomponent2.vue"
+
+#    #Make an index file 
+    1. For this create a new js file index.js 
+     touch resources/js/Index.vue
+    2. import it in app.js file as following 
+        require('./bootstrap');
+        // require('./routes');
+        //1. import
+        import Vue from 'vue'
+        import VueRouter from 'vue-router'
+        import router from "./routes";
+        import Index from "./Index";
+        // Vue.component("example-component2", require("./components/ExampleComponent2.vue").default);
+      //2.
+        Vue.use(VueRouter);
+        //3.
+        const app = new Vue({
+            el: '#app',
+        router: router,
+        components: {
+            "index": Index,
+
+        }
+        });
+    # Index.vue is registered as the component of app. 
+     3. write the following script in Index.vue file 
+     <template>
+        <div>
+         
+          <router-link to="/">Home page  </router-link>    
+           <router-link to="/second">Second</router-link>
+         <router-view ></router-view>
+        </div>
+    </template>    
+    #end      

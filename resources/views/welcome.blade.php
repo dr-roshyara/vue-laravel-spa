@@ -8,8 +8,9 @@
 <script src="{{ asset('js/app.js') }}" defer></script> 
 </head>
 <body>
-    <div id="app"> 
-        <router-view class="view one"></router-view>
+    <div id="app">  
+       <index></index>
+        {{-- <router-view class="view one"></router-view> --}}
      </div>
     
 </body>
