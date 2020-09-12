@@ -1918,7 +1918,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1926,16 +1925,19 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      Bookable1: {
+      Bookables: [{
         title: 'Product1',
         name: 'product-Name1',
         price: 230.40
-      },
-      Bookable2: {
+      }, {
         title: 'Product2',
         name: 'product-Name2',
         price: 180.40
-      }
+      }, {
+        title: 'Product3',
+        name: 'product-Name3',
+        price: 300.40
+      }]
     };
   }
 });
@@ -38247,28 +38249,29 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "test1" },
-    [
-      _c("bookable-list-item", {
-        attrs: {
-          title: _vm.Bookable1.title,
-          name: _vm.Bookable1.name,
-          price: _vm.Bookable1.price
-        }
-      }),
-      _vm._v(" "),
-      _c("bookable-list-item", {
-        attrs: {
-          title: _vm.Bookable2.title,
-          name: _vm.Bookable2.name,
-          price: _vm.Bookable2.price
-        }
-      })
-    ],
-    1
-  )
+  return _vm.Bookables.length
+    ? _c(
+        "div",
+        { staticClass: "test1" },
+        _vm._l(_vm.Bookables, function(Bookable, index) {
+          return _c(
+            "div",
+            { key: index },
+            [
+              _c("bookable-list-item", {
+                attrs: {
+                  title: Bookable.title,
+                  name: Bookable.name,
+                  price: Bookable.price
+                }
+              })
+            ],
+            1
+          )
+        }),
+        0
+      )
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true

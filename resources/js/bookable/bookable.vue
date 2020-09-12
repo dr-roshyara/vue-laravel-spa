@@ -1,11 +1,10 @@
 <template>
-    <div class="test1">
-        <bookable-list-item :title="Bookable1.title" :name="Bookable1.name" 
-        v-bind:price=Bookable1.price></bookable-list-item>
-        <bookable-list-item :title="Bookable2.title" :name="Bookable2.name" 
-        v-bind:price="Bookable2.price">
-        </bookable-list-item>
-        
+    <div class="test1" v-if="Bookables.length">
+        <div  v-for="(Bookable,index ) in Bookables" v-bind:key="index"> 
+        <bookable-list-item :title="Bookable.title" :name="Bookable.name" 
+        v-bind:price=Bookable.price></bookable-list-item>
+    </div>    
+         
     </div>
 </template> 
 <script>
@@ -16,16 +15,23 @@
     },
     data(){
         return {
-            Bookable1:{
+            Bookables:[
+                {
                  title : 'Product1',
                  name: 'product-Name1',
                  price: 230.40    
-            },
-            Bookable2:{
+             },
+               {
                  title : 'Product2',
                  name: 'product-Name2',
                  price: 180.40
-            }
+               },
+               {
+                 title : 'Product3',
+                 name: 'product-Name3',
+                 price: 300.40
+               }
+            ]
         };
     }
 } 

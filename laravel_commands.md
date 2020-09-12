@@ -363,4 +363,5 @@
          npm run watch
          php artisan serve 
          and then you see the homepage  
-#   #          
+#       #Use of v-for and v-if 
+        #
