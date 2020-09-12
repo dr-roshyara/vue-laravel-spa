@@ -233,41 +233,100 @@
     touch js/Bookable/Bookable.vue 
     create another vue component 
     touch js/Bookable/BookableListItem.vue
-    #Add the follwoing code in BookableListItem.vue
+    #bookable.vue 
+    In this file we display the  bookable list items  whose template is described in another vue component called BookableListItem.vue 
+     The template BookableListItem.vue can be written here as: 
+     <bookable-list-item></bookable-list-item >
+     or 
+     you can also write : 
+     <BookableListitem> </BookableListitem>
+     #Look at the real code 
             <template>
-            <div class="">
-                <h1>Bookable items  Title</h1>
-                <p>Content bookable list item </p>            
+            <div class="test1">
+                <bookable-list-item 
+                :title="Bookable1.title" 
+                :name="Bookable1.name" 
+                v-bind:price=Bookable1.price>
+                </bookable-list-item>
+                <!-- Second Item -->
+                <bookable-list-item 
+                :title="Bookable2.title" 
+                :name="Bookable2.name" 
+                v-bind:price="Bookable2.price">
+                </bookable-list-item>
+                
             </div>
-            </template>  
-     #Add the follwoing code in Bookable.Vue file 
-        <template>
-            <div class="test">
-                <bookable-list-item></bookable-list-item>
-            </div>
-        </template>
-        
+        </template> 
         <script>
             import BookableListItem from "./BookableListItem";
             export default {
                 components: { 
                 BookableListItem: BookableListItem,
+            },
+            data(){
+                return {
+                    Bookable1:{
+                        title : 'Product1',
+                        name: 'product-Name1',
+                        price: 230.40    
+                    },
+                    Bookable2:{
+                        title : 'Product2',
+                        name: 'product-Name2',
+                        price: 180.40
+                    }
+                };
             }
         } 
         </script>
-        
         <style scoped>
         .test{
-            background-color: aqua;
+            border-radius:2rem;
+            display: flex;
+            flex-wrap:wrap;
+        }
+        </style>
+
+    #BookableListitem.vue 
+    #This is the tempalte or component how Bookabble list items are displayed. 
+    #Here is the code 
+        <template>
+            <div class="test">
+                <h1> {{title}} </h1>
+                <ul> 
+                    <li>Name: {{name}},   </li>
+                    <li> price: {{price}}      </li>
+                    </ul>
+            
+            </div>
+        </template>  
+        <script>
+        export default {
+            props:{
+                title:String,
+                name:String,
+                price:Number, 
+            },
+            
+
+        }
+        </script>
+        <style scoped>
+        .test{
+            background-color: rgb(196, 189, 189);
             font-size: 2rem;
             margin-left:2rem;
-            padding:2rem;
+            padding:2rem; 
             margin-right:2rem;
+            margin-bottom:2rem; 
             align-items: center;
             justify-content: center;
+            max-width: 500px;
         }
-        </style>       
-         Here BookableListItem.vue is imported in Bookable and rendered as item list . 
+        </style> 
+    
+        #Import BookableListItem.vue 
+        #Here BookableListItem.vue is imported in Bookable and rendered as item list . 
          if you want to add more than one times you can add 
          <bookable-list-item> </bookabble-list-item>
          more than one time
@@ -304,4 +363,4 @@
          npm run watch
          php artisan serve 
          and then you see the homepage  
-          
+#   #          
