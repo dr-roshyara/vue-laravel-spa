@@ -10,7 +10,7 @@
          <!-- Here starts the navbar  -->
             <nav class="navbar navbar-light border-bottom">
                    <router-link  class ="navbar-brand mr-auto" v-bind:to="{name: 'home' }">Home  </router-link>    
-                <router-link class="btn nav-btn" v-bind:to="{name: 'home2' }" >Second</router-link>   
+                <router-link class="btn nav-btn" v-bind:to="{name: 'Bookable' }" >Second</router-link>   
                  </nav> 
         <div class="container mt-4 mb-4 pr-4 pl-4">
                      <router-view ></router-view>

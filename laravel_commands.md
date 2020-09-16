@@ -364,4 +364,175 @@
          php artisan serve 
          and then you see the homepage  
 #       #Use of v-for and v-if 
-        #
+        Look at the Bookable.vue and BookableListItem of this commit. 
+        - Use laoding =true and false options to show the two steps: 
+        1. Data loading 
+        2. After data has been loaded, then show the data 
+        For this purpose you should use the 
+        created () or 
+        mounted() method  and 
+        setTimeout() Method 
+       #We can also use some methods to  display the data in columns. For this purpose , you can use 
+       - css flexbox option 
+        - Bootstrap css row =col and row option
+#       #Use of methods and computed properties. 
+# Cerate Models 
+        #set up the database 
+         Go to the .env file and set up the database .
+        # Create Bookable Model 
+            php artisan make:model  Model\Bookable -m 
+        this command will create a Schema in 
+        database\migrations\2020_09_14_033807_create_bookables_table.php
+        and it has the following function 
+         public function up()
+            {
+                Schema::create('bookables', function (Blueprint $table) {
+                    $table->id();
+                    $table->string('title');
+                    $table->text('description');
+                    $table->float('price');
+                    $table->timestamps();
+                });
+            }
+        #After creating this schema, use migrate command 
+            php artisan migrate 
+        this command will create a migration in your database.  
+        #make a factory to populate your  database with fake data. 
+            php artisan mkae:factory BookableFactory --model Bookable 
+        #Edit it as following 
+            <?php
+
+            namespace Database\Factories;
+
+            use App\Models\Bookable;
+            use Illuminate\Database\Eloquent\Factories\Factory;
+            use Illuminate\Support\Str;
+
+            class BookableFactory extends Factory
+            {
+                /**
+                * The name of the factory's corresponding model.
+                *
+                * @var string
+                */
+                protected $model = Bookable::class;
+
+                /**
+                * Define the model's default state.
+                *
+                * @return array
+                */
+                public function definition()
+                {
+                    return [
+                        //
+                        'title' => $this->faker->sentence,
+                        'description' =>$this->faker->text,
+                        'price' =>$this->faker->numberBetween(200,500)
+
+                    ];
+                }
+            }
+        #Now you create the database seeder 
+            php artisan make:seeder BookableTableSeede
+        #add the following commands on it 
+            <?php
+
+            namespace Database\Seeders;
+            use App\Models\Bookable;
+            use Illuminate\Database\Seeder;
+
+            class BookableTableSeeder extends Seeder
+            {
+                /**
+                * Run the database seeds.
+                *
+                * @return void
+                */
+                public function run()
+                {
+                    //
+                    Bookable::factory(500)->create();
+                }
+            }
+         # Go to the mainseeder file : DatabaseSeeder.php file and add the following line on it . 
+            class DatabaseSeeder extends Seeder
+                {
+                    /**
+                    * Seed the application's database.
+                    *
+                    * @return void
+                    */
+                    public function run()
+                    {
+                        // User::factory(10)->create();
+                        $this->call(BookableTableSeeder::class);
+                    }
+                }
+        #Now run the db:seed command 
+            php artisan db:seed
+        #This command will populate the database with fake data. 
+# Define route and use Axios function to get the data from database 
+        #How to define route in laravel 
+            go to the routes/api.php 
+            define the routes as following 
+                Route::get('bookables', function(Request $request){
+                    return Bookable::all();
+                });
+                Route::get('bookables/{id}', function(Request $request, $id){
+                    return Bookable::findOrFail($id);
+                });
+        #The main function to get the data is written in the created property of vue app 
+        the axios function look like this . 
+            const request =axios.get("api/bookables")
+            .then ((response)=>{
+                this.Bookables=response.data;
+                this.loading=false;
+            });
+        #You should go one by one line of the file Bookables/Bookable.vue understand 
+        #Also please understand to set up loading:true and loading:false. 
+        #This loaidng property helps us to show ,,Data is loading '' message till the data has been loading. 
+        #Define css properties in Bookable/bookableItem.vue file . 
+        #Create links of each bookable item . for this you need to create another folder 
+        Bookable
+        and then add Bookable/Bookable.vue on it 
+        import this file by adding a line  in js/routes.js 
+        //example component 
+        import Bookable from "./Bookable/Bookable";
+        #create a route in js/routes.js 
+        const routes = [
+            {
+                path: '/',
+                component: Bookables,
+                name: "home",
+            }, 
+            {
+                path: '/bookale/:id',
+                component: Bookable, 
+                name: "Bookable",
+            }, 
+
+            ];
+        #Edit the Bookables/bookableListItem.vue file as following 
+        <template>
+            <div class="list">
+                <!-- look at the route -->
+                <router-link :to="{ name:'Bookable', params:{id}}">
+                    <h5 class="title"> {{title}} </h5>
+                </router-link>
+            
+                <ul > 
+                    <li>id: {{id}}</li> 
+                    <li> {{description}},   </li>
+                    <li> price: {{price}}      </li>
+                </ul>
+            
+            </div>
+        </template>  
+        #this route-link create a link for the individual bookable which is defined in route.js 
+#  Create resource Api Controller in Laravel to get the data properly. 
+        
+
+
+
+               

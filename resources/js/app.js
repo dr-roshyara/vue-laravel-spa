@@ -16,5 +16,8 @@ const app = new Vue({
   components: {
     "index": Index,
 
+  },
+  created(){
+    // console.log("app created");
   }
 }).$mount('#app');
