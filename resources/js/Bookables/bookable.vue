@@ -5,28 +5,7 @@
         </div>       
          <!-- <div class="bookable" v-else> -->
         <div class="bookable" v-else> 
-             <!-- <div  
-                style="padding-left: 2rem; padding-right:2rem;"
-                 v-for="row in rows" 
-                 :key="'row_'+row">
-                    <div class="row">
-                        <div class="col" 
-                            v-for="(Bookable, column)  in 
-                            Bookables.slice((row-1)* columns, row*columns)" 
-                            :key="'row_'+row+'column_'+column">
-                            row: {{row}},     col: {{column+1 }}
-                          
-                         <bookable-list-item 
-                    :title="Bookable.title" 
-                    :name="Bookable.name" 
-                    v-bind:price=Bookable.price>
-                    </bookable-list-item>
-                 </div>
-
-                      
-                    </div> 
-            </div> -->
-             <!-- Bookable   -->
+          
             <div  v-for="(Bookable,index ) in Bookables" v-bind:key="index"> 
             <bookable-list-item v-bind="Bookable"> 
 
@@ -81,9 +60,9 @@
         /**
          * Use Axios
          */
-        const request =axios.get("api/bookables")
+        const request =axios.get("api/bookables") 
         .then ((response)=>{
-            this.Bookables=response.data;
+            this.Bookables=response.data.data;
             this.loading=false;
         });
     

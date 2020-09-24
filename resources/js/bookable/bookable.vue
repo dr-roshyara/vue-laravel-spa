@@ -29,12 +29,12 @@ export default {
         return {
             loading:true,
             Bookable:null,
-        }
+        } 
     },
     created(){
         //  console.log(this.$route.params.id);
          axios.get(`/api/bookables/${this.$route.params.id}`)
-         .then (response=>(this.Bookable=response.data))
+         .then (response=>(this.Bookable=response.data.data))  // only for the json 
          .then (()=>{this.loading=false;});
     }
 }

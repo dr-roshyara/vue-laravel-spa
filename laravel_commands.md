@@ -531,7 +531,76 @@
         </template>  
         #this route-link create a link for the individual bookable which is defined in route.js 
 #  Create resource Api Controller in Laravel to get the data properly. 
-        
+    Instead of writing individual routes, we can write the route as resourceful. That means 
+    your write a route like following 
+        Route::apiResource('bookables', BookableController::class)->only(['index', 'show']);
+    #Here we have routed for index and show method only  with Bookable controller. 
+    Now we can create BookableController::class 
+        php artisan make:controller BookableController -m Bookable 
+    #This commands creates the Bookable Controller class. We  edit this class as follwoing ! 
+    #Actually Before we write codes in controller, we can create  Api resources 
+    #this can be done as follwoing 
+        php artisan make:resource BookableIndexResource
+        php artisan make:resource BookableShowResource
+    #A new folder resouces is created inside app folder and inside the resources, these two commands create Resource classes which return the JSON response. 
+       //BookableIndexResource.php 
+        <?php
+        namespace App\Http\Resources;
+
+        use Illuminate\Http\Resources\Json\JsonResource;
+
+        class BookableIndexResource extends JsonResource
+        {
+            /**
+            * Transform the resource into an array.
+            *
+            * @param  \Illuminate\Http\Request  $request
+            * @return array
+            */
+            public function toArray($request)
+            {
+                //return parent::toArray($request);
+                return [
+                    'id'            =>$this->id,
+                    'title'         =>$this->title,
+                    'description'   =>$this->description
+                ];
+            }
+        }
+    #BookableSchowResource.php is similar to above file 
+    Now lets add the following  codes to the BookableController 
+       use App\Http\Resources\BookableIndexResource  as BIResource;
+       use App\Http\Resources\BookableShowResource as BSResource;
+        // the index method 
+        public function index()
+        {
+            //
+            //  return Bookable::all();
+            return BIResource::collection(Bookable::all()); 
+        }
+        //the show method 
+        public function show( $id)
+        {
+            //
+            // return  Bookable::findorFail($id);
+            return new BSResource(Bookable::findorFail($id));  
+        }
+        //
+        Edit the code in Bookables/Bookable.vue 
+        const request =axios.get("api/bookables") 
+            .then ((response)=>{
+                this.Bookables=response.data.data;
+                this.loading=false;
+            });
+        // also edit it in the bookable/bookable.vue file    
+        created(){
+            //  console.log(this.$route.params.id);
+            axios.get(`/api/bookables/${this.$route.params.id}`)
+            .then (response=>(this.Bookable=response.data.data)) // only for the json 
+            .then (()=>{this.loading=false;});
+        }
+        #The reason to write response.data.data is that response.data is from axios command and another .data is  just because json data is wrapped by data in laravel. You can also unwrap it . See the documentaion of laravel 
+
 
 
 
