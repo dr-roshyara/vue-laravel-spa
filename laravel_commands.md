@@ -616,6 +616,8 @@
                             name="from"
                             class="form-control form-control-sm"
                             placehodlder="Start date"
+                            v-model="from"
+                            v-on:keyup.enter="check"
                             />
 
                         </div>
@@ -626,6 +628,8 @@
                             name="to"
                             class="form-control form-control-sm"
                             placehodlder="End date"
+                            v-model="to"
+                            v-on:keyup.enter="check"
                             />
 
                         </div>
@@ -646,7 +650,92 @@
                         font-weight:bolder;
                         }
                     </style>
-        #
+        #Add v-model on your input element 
+         add v-model="from" in input form of from and v-model="to" in input form of  to. Look at above lines 
+         #create  Booking model 
+             php artisan make:model  Booking -m 
+        #This commands create a new talbe bookings_table in databse for migration. add the columns of table as following . 
+            Schema::create('bookings', function (Blueprint $table) {
+                $table->id();
+                $table->timestamps();
+                $table->date('from');
+                $table->date('to');
+            $table->foreignId('bookable_id')->constrained()->onDelete('cascade'); 
+            });
+        #Create a Booking Factory 
+            php artisan make:factory BookingFactory --model =Booking 
+        #This command will create a Booking factory and edit the factory as following :     
+            <?php
+
+            namespace Database\Factories;
+
+            use App\Models\Booking;
+            use Illuminate\Database\Eloquent\Factories\Factory;
+            use Illuminate\Support\Str;
+            use Carbon\Carbon;
+
+            class BookingFactory extends Factory
+            {
+                /**
+                * The name of the factory's corresponding model.
+                *
+                * @var string
+                */
+                protected $model = Booking::class;
+
+                /**
+                * Define the model's default state.
+                *
+                * @return array
+                */
+                public function definition()
+                {
+                    $from =Carbon::instance($this->faker->dateTimeBetween('-1 months', '+1, months'));
+                    $to= (clone $from)->addDays(random_int(0, 14));
+                    return [
+                        //
+                        'from' => $from, 
+                        'to' =>$to
+
+                    ];
+                }
+            }
+        php artisan migrate 
+        #add from and to as fillabe to Booking model 
+              protected $fillable =['form', 'to'];   
+    #       
+    # create booking table seeder 
+         php artisan make:seeder BookingTableSeeder 
+    #write the following code to BookingTableseeder 
+       public function run()
+        {
+                //
+                Bookable::all()->each(function(Bookable $bookable){
+                    // $booking =Booking::Factory()->make();
+                    $booking =Booking::factory()->create();
+                    $bookings =collect([$booking]);
+                    for ($i=0; $i<random_int(1,20); $i++){
+                        $from =(clone $booking->to)->addDays(random_int(1,14));
+                        $to =(clone $from)->addDays(random_int(1,14));
+                        $booking =Booking::make([
+                            'from'=> $from, 
+                            'to'=> $to
+                        ]);
+                        $bookings->push($booking);
+                    }
+                        $bookable->bookings()->saveMany($bookings);
+                });
+            }
+            
+    #add the following line to DatabaseSeeder.php 
+          $this->call(BookingTableSeeder::class);
+    #finally you can do 
+        php artisan migrate:fresh --seed 
+        php artisan db:seed 
+    #Until here we have created Booking controller and some fake bookings . 
+    
+
+
 
 
                
