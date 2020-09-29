@@ -727,13 +727,21 @@
                 });
             }
             
-    #add the following line to DatabaseSeeder.php 
-          $this->call(BookingTableSeeder::class);
-    #finally you can do 
-        php artisan migrate:fresh --seed 
-        php artisan db:seed 
-    #Until here we have created Booking controller and some fake bookings . 
-    
+        #add the following line to DatabaseSeeder.php 
+            $this->call(BookingTableSeeder::class);
+        #finally you can do 
+            php artisan migrate:fresh --seed 
+            php artisan db:seed 
+        #Until here we have created Booking controller and some fake bookings . 
+    #Create a Bookable Availability Check Controller 
+            php artisan make:controller Api/BookableAvailabilityController --invokable
+        #After creating the Api/BookableAvailabilityController , create the route  in api also 
+        as follwoing 
+            Route::get('bookables/{bookable}/availability', BookableAvailabilityController::class)
+            ->name('bookables.availability.show');
+        #This route creates a get request for from and to. 
+        look at the api/BookableAvailabilityController.php file 
+        
 
 
 
