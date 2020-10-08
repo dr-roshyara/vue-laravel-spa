@@ -741,7 +741,12 @@
             ->name('bookables.availability.show');
         #This route creates a get request for from and to. 
         look at the api/BookableAvailabilityController.php file 
-        
+#   # 
+    php artisan make:model Review -m 
+    # After updating the Review migration table, use the following command 
+    php artisan migrate 
+    php artisan make:factory ReviewFactory 
+    php artisan make:seeder ReveiwsTableSeeder         
 
 
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\Review;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,5 +16,7 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         $this->call(BookableTableSeeder::class);
         $this->call(BookingTableSeeder::class);
+        $this->call(ReviewsTableSeeder::class);
+        
     }
 }

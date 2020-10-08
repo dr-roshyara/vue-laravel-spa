@@ -1947,16 +1947,53 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       from: null,
-      to: null
+      to: null,
+      loading: false,
+      status: null,
+      errors: null
     };
   },
   methods: {
     check: function check() {
-      alert("check the value");
+      var _this = this;
+
+      this.loading = true;
+      this.erros = null, axios.get("/api/bookables/".concat(this.$route.params.id, "/availability?from=").concat(this.from, "&to=").concat(this.to)).then(function (response) {
+        _this.status = response.status;
+      })["catch"](function (error) {
+        if (422 === error.response.status) {
+          _this.errors = error.response.data.errors;
+        }
+
+        _this.status = error.response.status;
+      }).then(function () {
+        return _this.loading = false;
+      }); //    alert( "check the value");
+    },
+    errorFor: function errorFor(field) {
+      return this.hasErrors && this.errors[field] ? this.errors[field] : null;
+    }
+  },
+  computed: {
+    hasErrors: function hasErrors() {
+      return 422 === this.status & this.errors != null;
+    },
+    hasAvailability: function hasAvailability() {
+      return 200 === this.status;
+    },
+    noAvailability: function noAvailability() {
+      return 404 === this.status;
     }
   }
 });
@@ -1973,6 +2010,9 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Availability__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Availability */ "./resources/js/Bookable/Availability.vue");
+/* harmony import */ var _ReviewList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReviewList */ "./resources/js/Bookable/ReviewList.vue");
+//
+//
 //
 //
 //
@@ -1999,9 +2039,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
-    Availability: _Availability__WEBPACK_IMPORTED_MODULE_0__["default"]
+    Availability: _Availability__WEBPACK_IMPORTED_MODULE_0__["default"],
+    ReviewList: _ReviewList__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -6629,7 +6671,26 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\nlabel[data-v-98601dce]{\n    font-size:0.7rem;\ntext-transform: uppercase;\ncolor:gray;\nfont-weight:bolder;\n}\n", ""]);
+exports.push([module.i, "\nlabel[data-v-98601dce]{\n    font-size:0.7rem;\ntext-transform: uppercase;\ncolor:gray;\nfont-weight:bolder;\n}\nis-invalid[data-v-98601dce]{\n    border-color:brown;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Bookable/ReviewList.vue?vue&type=style&index=0&id=1bd527d4&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Bookable/ReviewList.vue?vue&type=style&index=0&id=1bd527d4&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.review[data-v-1bd527d4]{\n    padding-left: 1.5rem;\n}    \n", ""]);
 
 // exports
 
@@ -37863,6 +37924,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Bookable/ReviewList.vue?vue&type=style&index=0&id=1bd527d4&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Bookable/ReviewList.vue?vue&type=style&index=0&id=1bd527d4&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ReviewList.vue?vue&type=style&index=0&id=1bd527d4&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Bookable/ReviewList.vue?vue&type=style&index=0&id=1bd527d4&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Bookables/Bookable.vue?vue&type=style&index=0&id=f49a57c0&scoped=true&lang=css&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Bookables/Bookable.vue?vue&type=style&index=0&id=f49a57c0&scoped=true&lang=css& ***!
@@ -38526,7 +38617,18 @@ var render = function() {
     _c(
       "h5",
       { staticClass: "text-uppercase text-secondary font-weight-bolder" },
-      [_vm._v("Availability")]
+      [
+        _vm._v("Availability\n       "),
+        _vm.hasAvailability
+          ? _c("span", [_vm._v("   yes         ")])
+          : _vm._e(),
+        _vm._v(" "),
+        _vm.noAvailability
+          ? _c("span", { staticClass: "text-danger" }, [
+              _vm._v("        no    ")
+            ])
+          : _vm._e()
+      ]
     ),
     _vm._v(" "),
     _c("div", { staticClass: "form-row" }, [
@@ -38543,6 +38645,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control form-control-sm",
+          class: [{ "is-invalid": this.errorFor("from") }],
           attrs: { type: "text", name: "from", placehodlder: "Start date" },
           domProps: { value: _vm.from },
           on: {
@@ -38578,6 +38681,7 @@ var render = function() {
             }
           ],
           staticClass: "form-control form-control-sm",
+          class: [{ "is-invalid": this.errorFor("to") }],
           attrs: { type: "text", name: "to", placehodlder: "End date" },
           domProps: { value: _vm.to },
           on: {
@@ -38606,6 +38710,7 @@ var render = function() {
         "button",
         {
           staticClass: "btn btn-secondary btn-block",
+          attrs: { disabled: _vm.loading },
           on: { click: _vm.check }
         },
         [_vm._v(" Check! ")]
@@ -38639,40 +38744,135 @@ var render = function() {
     _vm.loading
       ? _c("div", [_c("p", [_vm._v("Data Loading ...")])])
       : _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-sm-7 pb-4" }, [
-            _c(
-              "div",
-              {
-                staticClass: "card",
-                staticStyle: { border: "0.1rem solid #9df78b" }
-              },
-              [
-                _c("div", { staticClass: "card-body" }, [
-                  _c("h5", { staticStyle: { "font-weight": "bold" } }, [
-                    _vm._v(_vm._s(_vm.Bookable.title))
-                  ]),
-                  _vm._v(" "),
-                  _c("ul", [
-                    _c("li", [_vm._v("id: " + _vm._s(_vm.Bookable.id))]),
-                    _vm._v(" "),
-                    _c("li", [
-                      _vm._v(" " + _vm._s(_vm.Bookable.description) + ",   ")
+          _c(
+            "div",
+            { staticClass: "col-sm-7 pb-4" },
+            [
+              _c(
+                "div",
+                {
+                  staticClass: "card",
+                  staticStyle: { border: "0.1rem solid #9df78b" }
+                },
+                [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("h5", { staticStyle: { "font-weight": "bold" } }, [
+                      _vm._v(_vm._s(_vm.Bookable.title))
                     ]),
                     _vm._v(" "),
-                    _c("li", [
-                      _vm._v(" price: " + _vm._s(_vm.Bookable.price) + "      ")
+                    _c("ul", [
+                      _c("li", [_vm._v("id: " + _vm._s(_vm.Bookable.id))]),
+                      _vm._v(" "),
+                      _c("li", [
+                        _vm._v(" " + _vm._s(_vm.Bookable.description) + ",   ")
+                      ]),
+                      _vm._v(" "),
+                      _c("li", [
+                        _vm._v(
+                          " price: " + _vm._s(_vm.Bookable.price) + "      "
+                        )
+                      ])
                     ])
                   ])
-                ])
-              ]
-            )
-          ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c("review-list")
+            ],
+            1
+          ),
           _vm._v(" "),
           _c("div", { staticClass: "col-sm-5 pb-4" }, [_c("availability")], 1)
         ])
   ])
 }
 var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Bookable/ReviewList.vue?vue&type=template&id=1bd527d4&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Bookable/ReviewList.vue?vue&type=template&id=1bd527d4&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "review" },
+    [
+      _c(
+        "h6",
+        {
+          staticClass: "text-uppercase text-secondary font-weight-bolder pt-4  "
+        },
+        [_vm._v("Review List")]
+      ),
+      _vm._v(" "),
+      _vm._l(3, function(number) {
+        return _c(
+          "div",
+          { key: number, staticClass: "border-bottm d-none d-md-block" },
+          [
+            _vm._m(0, true),
+            _vm._v(" "),
+            _vm._m(1, true),
+            _vm._v(" "),
+            _vm._m(2, true)
+          ]
+        )
+      })
+    ],
+    2
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row pt-4 pb-2" }, [
+      _c("div", { staticClass: "col-md-6" }, [
+        _vm._v("\r\n                 Nab Roshyara\r\n             ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-6 d-flex justify-content-end" }, [
+        _vm._v(" \r\n                 STAR RATING \r\n             ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row pb-2" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _vm._v("\r\n                 Added  5 minutes ago \r\n             ")
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row pb-2" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _vm._v("\r\n                 Content of the review \r\n             ")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -54203,6 +54403,77 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Bookable_vue_vue_type_template_id_6649de81___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Bookable_vue_vue_type_template_id_6649de81___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/Bookable/ReviewList.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/Bookable/ReviewList.vue ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ReviewList_vue_vue_type_template_id_1bd527d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ReviewList.vue?vue&type=template&id=1bd527d4&scoped=true& */ "./resources/js/Bookable/ReviewList.vue?vue&type=template&id=1bd527d4&scoped=true&");
+/* harmony import */ var _ReviewList_vue_vue_type_style_index_0_id_1bd527d4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReviewList.vue?vue&type=style&index=0&id=1bd527d4&scoped=true&lang=css& */ "./resources/js/Bookable/ReviewList.vue?vue&type=style&index=0&id=1bd527d4&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+var script = {}
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  script,
+  _ReviewList_vue_vue_type_template_id_1bd527d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ReviewList_vue_vue_type_template_id_1bd527d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "1bd527d4",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Bookable/ReviewList.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Bookable/ReviewList.vue?vue&type=style&index=0&id=1bd527d4&scoped=true&lang=css&":
+/*!*******************************************************************************************************!*\
+  !*** ./resources/js/Bookable/ReviewList.vue?vue&type=style&index=0&id=1bd527d4&scoped=true&lang=css& ***!
+  \*******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReviewList_vue_vue_type_style_index_0_id_1bd527d4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./ReviewList.vue?vue&type=style&index=0&id=1bd527d4&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Bookable/ReviewList.vue?vue&type=style&index=0&id=1bd527d4&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReviewList_vue_vue_type_style_index_0_id_1bd527d4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReviewList_vue_vue_type_style_index_0_id_1bd527d4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReviewList_vue_vue_type_style_index_0_id_1bd527d4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReviewList_vue_vue_type_style_index_0_id_1bd527d4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ReviewList_vue_vue_type_style_index_0_id_1bd527d4_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/Bookable/ReviewList.vue?vue&type=template&id=1bd527d4&scoped=true&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/Bookable/ReviewList.vue?vue&type=template&id=1bd527d4&scoped=true& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReviewList_vue_vue_type_template_id_1bd527d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./ReviewList.vue?vue&type=template&id=1bd527d4&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Bookable/ReviewList.vue?vue&type=template&id=1bd527d4&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReviewList_vue_vue_type_template_id_1bd527d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ReviewList_vue_vue_type_template_id_1bd527d4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

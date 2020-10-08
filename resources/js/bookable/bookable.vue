@@ -16,7 +16,9 @@
                     </ul>
                </div>
            </div>
+           <review-list></review-list>
       </div>
+
     <div class="col-sm-5 pb-4">
         <availability></availability>
     </div>
@@ -25,9 +27,11 @@
 </template>
 <script>
 import Availability from "./Availability";
+import ReviewList from "./ReviewList";
 export default {
     components:{
-        Availability
+        Availability,
+        ReviewList
     },
     data(){
         return {
