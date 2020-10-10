@@ -16,13 +16,13 @@ class ReviewsTableSeeder extends Seeder
     {
         //
         Bookable::all()->each(function(Bookable $bookable){
-               $reviews =  Review::factory()->state(
+               $reviews =  Review::factory()->count(3)->state(
                    ['bookable_id' => $bookable->id,
                  'booking_id'=>$bookable->bookings->random()->id
-                ])->count(3)->create();
+                ])->count(3)->make();
                $bookable->reviews()->saveMany($reviews);
 
-        });
+        }); 
 
     }
 }

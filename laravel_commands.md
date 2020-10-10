@@ -747,6 +747,12 @@
     php artisan migrate 
     php artisan make:factory ReviewFactory 
     php artisan make:seeder ReveiwsTableSeeder         
+    
+#    #create BookableReviewsController and routes etc 
+     ## Create a Controller 
+    php artisan make:controller Api/BookableReviewcontroller
+    #make Bookable reveiw resource 
+     php artisan make:resource BookableReviewIndexResource
 
 
 
