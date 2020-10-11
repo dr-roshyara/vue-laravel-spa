@@ -753,8 +753,20 @@
     php artisan make:controller Api/BookableReviewcontroller
     #make Bookable reveiw resource 
      php artisan make:resource BookableReviewIndexResource
-
-
+    #use moement.js javascript library to describe time in a human friendly way. 
+    #for this you need to  install  it 
+        npm install moment --save 
+    #and then import in the script you want to use. We used in Reviewlist.vue 
+    #file
+    #In vue type of file, you can not use  aonther js library except vue. So you need to use moment within ** <script> </script> **
+    #Install font awesome 
+    npm install --save @fortawesome/fontawesome-free
+#    #Work on the Review component 
+    #Register Star Sharing component globally. 
+    #For this we need to add the follwong lines in app.js 
+    import StarRating from "./shared/components/StarRating";
+    Vue.component("star-rating", StarRating);   
+    #Create  computed methods to get stars as rating 
 
 
                

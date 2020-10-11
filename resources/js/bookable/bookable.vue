@@ -16,11 +16,13 @@
                     </ul>
                </div>
            </div>
-           <review-list></review-list>
+           <review-list v-bind:bookable-id="this.$route.params.id">
+               
+           </review-list>
       </div>
 
     <div class="col-sm-5 pb-4">
-        <availability></availability>
+        <availability v-bind:bookabble-id="this.$route.params.id"></availability>
     </div>
         </div>
     </div>
