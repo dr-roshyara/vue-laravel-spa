@@ -35,6 +35,7 @@ class BookingFactory extends Factory
              'bookable_id'=>$bookable_id,
              'from' => $from, 
               'to' =>$to
+             
 
         ];
     }

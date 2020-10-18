@@ -767,6 +767,24 @@
     import StarRating from "./shared/components/StarRating";
     Vue.component("star-rating", StarRating);   
     #Create  computed methods to get stars as rating 
-
-
+    Aftering creating the stars . 
+    Lets create a controller 
+        php artisan make:controller Api/ReviewController
+    #also create a review Reserouce 
+        php artisan make:resource ReviewResource 
+    #Create a Reveiw routing also in api 
+        Route::apiResource('reviews', ReviewController::class)->only(['show']);
+    #Here is end of lecture 76
+        php artisan make:migration AddReviewKeytoBookingsTable
+    # write an event listner in the following way. 
+      1. You go to the Booking Model. // Booking.php 
+       2. Then you want to fire an event when an Instance of Booking Model is created. for this you need to create a static function called boot().  Here we create it in the following way. 
+            protected static function boot(){
+                parent:boot();
+                static::creating(function($booking){
+                        $booking->review_key=Str::uuid();
+                });
+            }
+        This boot function  fire an event which create a review key as Str::uuid()  as soon as Booking  Object is created 
+        
                

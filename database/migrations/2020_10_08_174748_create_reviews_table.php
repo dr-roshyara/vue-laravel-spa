@@ -17,7 +17,7 @@ class CreateReviewsTable extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             // $table->id();
             $table->uuid('id')->primary(); 
-            $table->unsignedTinyInteger('rating');
+            $table->unsignedDouble('rating');
             $table->text('content');
             $table->foreignId('bookable_id')->constrained()->onDelete('cascade');
             $table->foreignId('booking_id')  ->constrained()  ->onDelete('cascade');

@@ -26,7 +26,7 @@ class ReviewFactory extends Factory
             // 
             'id'=>Str::uuid(),
             'content'=>$this->faker->sentences(5,true),
-            'rating'=>random_int(1,5)
+            'rating'=>round(rand(1,4)+1/rand(1,10),2)  
         ];
     }
 }

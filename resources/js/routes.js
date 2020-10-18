@@ -4,6 +4,7 @@
 import Bookables from "./Bookables/Bookable";
 //example component 
 import Bookable from "./Bookable/Bookable";
+import Review from "./Review/Review"
 //  import Index from "./Index";
 //2. Define the routes 
 const routes = [
@@ -17,6 +18,12 @@ const routes = [
     component: Bookable, 
     name: "Bookable",
   }, 
+  {
+    path:'/review/:id',
+    component: Review,
+    name:"Review"
+
+  }
 
 ];
 //3. create the istance of vue router . 
