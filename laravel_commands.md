@@ -1,5 +1,6 @@
 ## Laravel Commands and Steps 
-
+    The original github page 
+    https://github.com/piotr-jura-udemy/laravel-vue-spa-course/
 # Installiation 
     #first install laravel 
     laravel new laravel/vue-laravel-spa
@@ -786,5 +787,11 @@
                 });
             }
         This boot function  fire an event which create a review key as Str::uuid()  as soon as Booking  Object is created 
-        
-               
+#   #Create a Controller 
+      php artisan make:controller Api/BookingByReviewController --invokable
+    #lecture 79 
+    # create a rosource for Booking By Review controller 
+    php artisan make:resource BookingByReviewShowResource 
+    #create another resource 
+    php artisan make:resource BookingByReveiwBookableShowResource
+    

@@ -3,7 +3,7 @@
         <h5 class="text-uppercase text-secondary font-weight-bolder">Availability
            <span v-if="hasAvailability" >   yes         </span>
             <span v-if="noAvailability" class="text-danger">        no    </span>
-            </h5> 
+            </h5>  
        <div class="form-row">
             <!-- starts here -->
             <div class="form-group sm-6">
@@ -47,8 +47,8 @@
 <script>
 export default {
     props:{
-        bookableId:String
-    },
+        bookableId:[String,Number]
+    }, 
     data(){
         return {
             from :null,
@@ -62,7 +62,11 @@ export default {
         check(){
             this.loading=true;
             this.erros=null,
-            //axios.get(`/api/bookables/${this.$route.params.id}/availability?from=${this.from}&to=${this.to}`)
+            this.$store.commit('setLastSearch',{
+                from: this.from, 
+                to: this.to
+            });
+            // axios.get(`/api/bookables/${this.$route.params.id}/availability?from=${this.from}&to=${this.to}`);
             axios.get(`/api/bookables/${this.bookableId}/availability?from=${this.from}&to=${this.to}`)
             .then(
                 response=>{
